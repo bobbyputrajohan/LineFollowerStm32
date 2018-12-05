@@ -1,4 +1,4 @@
-.\objects\main.o: main.cpp
+.\objects\main.o: User\main.cpp
 .\objects\main.o: .\Lib\CMSIS\inc\stm32f4xx.h
 .\objects\main.o: .\Lib\CMSIS\inc\core_cm4.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -19,9 +19,9 @@
 .\objects\main.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h
 .\objects\main.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\objects\main.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\objects\main.o: main.h
+.\objects\main.o: User\main.h
 .\objects\main.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\cppforstm32.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\main.o: Motor.h
-.\objects\main.o: Pwm.h
+.\objects\main.o: User\Motor.h
+.\objects\main.o: User\Pwm.h

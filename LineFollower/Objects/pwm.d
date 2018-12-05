@@ -1,4 +1,4 @@
-.\objects\pwm.o: Pwm.cpp
+.\objects\pwm.o: User\Pwm.cpp
 .\objects\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\pwm.o: .\Lib\CMSIS\inc\stm32f4xx.h
 .\objects\pwm.o: .\Lib\CMSIS\inc\core_cm4.h
@@ -20,4 +20,4 @@
 .\objects\pwm.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h
 .\objects\pwm.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\objects\pwm.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\objects\pwm.o: Pwm.h
+.\objects\pwm.o: User\Pwm.h

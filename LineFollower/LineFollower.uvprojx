@@ -337,7 +337,7 @@
               <MiscControls>--exceptions --cpp11</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F40_41xxx,USE_STM324xG_EVAL,STM32,STM32F40x,ARM_MATH_CM4,__FPU_PRESENT</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Lib\CMSIS;.\Lib\CMSIS\inc;.\Lib\CMSIS\src;.\Lib\STM32F4xx_StdPeriph_Driver;.\Lib\STM32F4xx_StdPeriph_Driver\inc;.\Lib\STM32F4xx_StdPeriph_Driver\src</IncludePath>
+              <IncludePath>.\Lib\CMSIS;.\Lib\CMSIS\inc;.\Lib\CMSIS\src;.\Lib\STM32F4xx_StdPeriph_Driver;.\Lib\STM32F4xx_StdPeriph_Driver\inc;.\Lib\STM32F4xx_StdPeriph_Driver\src;.\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -384,22 +384,17 @@
             <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\main.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Pwm.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\Pwm.cpp</FilePath>
+              <FilePath>.\User\main.cpp</FilePath>
             </File>
             <File>
               <FileName>Motor.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\Motor.cpp</FilePath>
+              <FilePath>.\User\Motor.cpp</FilePath>
             </File>
             <File>
-              <FileName>Motor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Motor.h</FilePath>
+              <FileName>Pwm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\Pwm.cpp</FilePath>
             </File>
           </Files>
         </Group>

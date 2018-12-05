@@ -60,6 +60,7 @@ void Pwm::setDutyCycleTim10(int8_t setDutyCycle)
         TIM10->CCR1 = m_pulseTim10;
     }
 }
+
 //PWM TIM 11
 void Pwm::pwmInitPinTim11(uint32_t periodeHz)
 {
@@ -106,8 +107,6 @@ void Pwm::setPeriodeTim11(uint32_t setPeriodeHz)
 
 void Pwm::setDutyCycleTim11(int8_t setDutyCycle)
 {
-    //dir
-
     if(setDutyCycle>-1)
     {
         if(setDutyCycle > 100)
@@ -116,15 +115,5 @@ void Pwm::setDutyCycleTim11(int8_t setDutyCycle)
         }
         m_pulseTim11 = ((getPeriodeTim11() + 1) * setDutyCycle) / 100 - 1;
         TIM11->CCR1 = m_pulseTim11;
-    }
-    else
-    {
-        //dir
-        setDutyCycle = abs(setDutyCycle);
-        if(setDutyCycle > 100)
-        {
-            setDutyCycle = 100;
-        }
-        
     }
 }
