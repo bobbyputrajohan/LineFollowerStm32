@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LineFollower.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LineFollower.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Dec 05 14:52:24 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Dec 05 15:49:54 2018
 <BR><P>
 <H3>Maximum Stack Usage =         92 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -511,13 +511,13 @@ Global Symbols
 <P><STRONG><a name="[73]"></a>TIM_OC1Init</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, stm32f4xx_tim.o(i.TIM_OC1Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIM_OC1Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmPulseInitTim11()
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmPulseInitTim10()
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
 </UL>
 
 <P><STRONG><a name="[74]"></a>TIM_OC1PreloadConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC1PreloadConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmPulseInitTim11()
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmPulseInitTim10()
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
 </UL>
 
 <P><STRONG><a name="[6f]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_TimeBaseInit))
@@ -578,8 +578,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[72]"></a>Pwm::pwmPulseInitTim10()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm17pwmPulseInitTim10Ev))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Pwm::pwmPulseInitTim10() &rArr; TIM_OC1Init
+<P><STRONG><a name="[72]"></a>Pwm::pwmModeInitTim10()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm16pwmModeInitTim10Ev))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Pwm::pwmModeInitTim10() &rArr; TIM_OC1Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
@@ -587,8 +587,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[75]"></a>Pwm::pwmPulseInitTim11()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm17pwmPulseInitTim11Ev))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Pwm::pwmPulseInitTim11() &rArr; TIM_OC1Init
+<P><STRONG><a name="[75]"></a>Pwm::pwmModeInitTim11()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm16pwmModeInitTim11Ev))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Pwm::pwmModeInitTim11() &rArr; TIM_OC1Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
@@ -596,7 +596,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[76]"></a>Pwm::setDutyCycleTim10(signed char)</STRONG> (Thumb, 44 bytes, Stack size 4 bytes, pwm.o(i._ZN3Pwm17setDutyCycleTim10Ea))
+<P><STRONG><a name="[76]"></a>Pwm::setDutyCycleTim10(signed char)</STRONG> (Thumb, 40 bytes, Stack size 4 bytes, pwm.o(i._ZN3Pwm17setDutyCycleTim10Ea))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Pwm::setDutyCycleTim10(signed char)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim10()
@@ -604,7 +604,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
 </UL>
 
-<P><STRONG><a name="[78]"></a>Pwm::setDutyCycleTim11(signed char)</STRONG> (Thumb, 44 bytes, Stack size 4 bytes, pwm.o(i._ZN3Pwm17setDutyCycleTim11Ea))
+<P><STRONG><a name="[78]"></a>Pwm::setDutyCycleTim11(signed char)</STRONG> (Thumb, 40 bytes, Stack size 4 bytes, pwm.o(i._ZN3Pwm17setDutyCycleTim11Ea))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Pwm::setDutyCycleTim11(signed char)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim11()
@@ -656,8 +656,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::initPwm(Pwm*)
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmPulseInitTim11()
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmPulseInitTim10()
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setPeriodeTim11(unsigned)
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setPeriodeTim10(unsigned)
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)

@@ -3,6 +3,7 @@
 #include "main.h"
 #include "Motor.h"
 
+
 void initGpioC()
 {
     GPIO_InitTypeDef  GPIO_InitStructure;
@@ -24,12 +25,13 @@ int main()
     Pwm *p_pwm = &Pwm1;
     Motor *p_motor = &motor;
     p_motor->initPwm(&Pwm1);
+    
     p_pwm -> setPeriodeTim10(10000);
     p_pwm -> pwmInitPinTim10 (Pwm1.getPeriodeTim10());
-    p_pwm -> pwmPulseInitTim10(); 
+    p_pwm -> pwmModeInitTim10(); 
     p_pwm -> setPeriodeTim11(25000);
     p_pwm -> pwmInitPinTim11(Pwm1.getPeriodeTim11());
-    p_pwm -> pwmPulseInitTim11();     
+    p_pwm -> pwmModeInitTim11();     
     while(1)
     {
         p_motor->motorMove(-75,-70);   

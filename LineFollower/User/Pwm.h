@@ -1,17 +1,17 @@
 #include <stdint.h>
-class Pwm 
+class Pwm
 {
     public:
         Pwm(){}
         ~Pwm(){}
         void pwmInitPinTim10(uint32_t periodeHz);
-        void pwmPulseInitTim10();
+        void pwmModeInitTim10();
         uint32_t getPeriodeTim10();
         void setPeriodeTim10(uint32_t setPeriodeHz);
         void setDutyCycleTim10(int8_t setDutyCycle);
             
         void pwmInitPinTim11(uint32_t periodeHz);
-        void pwmPulseInitTim11();
+        void pwmModeInitTim11();
         uint32_t getPeriodeTim11();
         void setPeriodeTim11(uint32_t setPeriodeHz);
         void setDutyCycleTim11(int8_t setDutyCycle);

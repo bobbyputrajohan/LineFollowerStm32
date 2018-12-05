@@ -26,8 +26,7 @@ void Pwm::pwmInitPinTim10(uint32_t periodeHz)
     TIM_Cmd(TIM10, ENABLE);
 }
 
-
-void Pwm::pwmPulseInitTim10()
+void Pwm::pwmModeInitTim10()
 {
     TIM_OCInitTypeDef TIM_OCStruct;
 	TIM_OCStruct.TIM_OCMode = TIM_OCMode_PWM2;
@@ -49,16 +48,12 @@ void Pwm::setPeriodeTim10(uint32_t setPeriodeHz)
 
 void Pwm::setDutyCycleTim10(int8_t setDutyCycle)
 {
-    //dir
-    if(setDutyCycle > -1)
+    if(setDutyCycle > 100)
     {
-        if(setDutyCycle > 100)
-        {
-            setDutyCycle = 100;
-        }
-        m_pulseTim10 = ((getPeriodeTim10() + 1) * setDutyCycle) / 100 - 1;
-        TIM10->CCR1 = m_pulseTim10;
+        setDutyCycle = 100;
     }
+    m_pulseTim10 = ((getPeriodeTim10() + 1) * setDutyCycle) / 100 - 1;
+    TIM10->CCR1 = m_pulseTim10;
 }
 
 //PWM TIM 11
@@ -84,8 +79,7 @@ void Pwm::pwmInitPinTim11(uint32_t periodeHz)
     TIM_Cmd(TIM11, ENABLE);
 }
 
-
-void Pwm::pwmPulseInitTim11()
+void Pwm::pwmModeInitTim11()
 {
     TIM_OCInitTypeDef TIM_OCStruct;
 	TIM_OCStruct.TIM_OCMode = TIM_OCMode_PWM2;
@@ -95,6 +89,7 @@ void Pwm::pwmPulseInitTim11()
 	TIM_OC1Init(TIM11, &TIM_OCStruct);
 	TIM_OC1PreloadConfig(TIM11, TIM_OCPreload_Enable);
 }
+
 uint32_t Pwm::getPeriodeTim11()
 {
     return m_periodeTim11;
@@ -107,13 +102,10 @@ void Pwm::setPeriodeTim11(uint32_t setPeriodeHz)
 
 void Pwm::setDutyCycleTim11(int8_t setDutyCycle)
 {
-    if(setDutyCycle>-1)
+    if(setDutyCycle > 100)
     {
-        if(setDutyCycle > 100)
-        {
-            setDutyCycle = 100;
-        }
-        m_pulseTim11 = ((getPeriodeTim11() + 1) * setDutyCycle) / 100 - 1;
-        TIM11->CCR1 = m_pulseTim11;
+        setDutyCycle = 100;
     }
+    m_pulseTim11 = ((getPeriodeTim11() + 1) * setDutyCycle) / 100 - 1;
+    TIM11->CCR1 = m_pulseTim11;
 }
