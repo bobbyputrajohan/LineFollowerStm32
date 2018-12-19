@@ -337,7 +337,7 @@
               <MiscControls>--exceptions --cpp11</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F40_41xxx,USE_STM324xG_EVAL,STM32,STM32F40x,ARM_MATH_CM4,__FPU_PRESENT</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Lib\CMSIS;.\Lib\CMSIS\inc;.\Lib\CMSIS\src;.\Lib\STM32F4xx_StdPeriph_Driver;.\Lib\STM32F4xx_StdPeriph_Driver\inc;.\Lib\STM32F4xx_StdPeriph_Driver\src;.\User</IncludePath>
+              <IncludePath>.\Lib\CMSIS;.\Lib\CMSIS\inc;.\Lib\CMSIS\src;.\Lib\STM32F4xx_StdPeriph_Driver;.\Lib\STM32F4xx_StdPeriph_Driver\inc;.\Lib\STM32F4xx_StdPeriph_Driver\src;.\User;C:\Users\Bukalapak\Downloads\Compressed\tm_stm32f4_spi</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -395,6 +395,21 @@
               <FileName>Pwm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\User\Pwm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\SPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>Gyro.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\User\Gyro.cpp</FilePath>
             </File>
           </Files>
         </Group>

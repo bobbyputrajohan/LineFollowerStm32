@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "stm32f4xx.h"
 #include "Pwm.h"
 #include "stm32f4xx_gpio.h"

@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\LineFollower.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LineFollower.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Dec 05 15:49:54 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Dec 19 20:35:29 2018
 <BR><P>
-<H3>Maximum Stack Usage =         92 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        124 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; Pwm::pwmInitPinTim11(unsigned) &rArr; GPIO_PinAFConfig
+main &rArr; Delay_ms &rArr; RCC_GetClocksFreq
 <P>
 <H3>
 Mutually Recursive functions
@@ -128,7 +128,7 @@ Global Symbols
 <P><STRONG><a name="[63]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
-<P><STRONG><a name="[82]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[86]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[64]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
@@ -138,15 +138,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[83]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[87]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[84]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[88]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[85]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[89]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[86]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+<P><STRONG><a name="[8a]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
 
-<P><STRONG><a name="[87]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[8b]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
 <P><STRONG><a name="[5]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
@@ -466,106 +466,158 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[88]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[8c]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
-<P><STRONG><a name="[6b]"></a>GPIO_Init</STRONG> (Thumb, 144 bytes, Stack size 20 bytes, stm32f4xx_gpio.o(i.GPIO_Init))
+<P><STRONG><a name="[68]"></a>Delay_ms</STRONG> (Thumb, 334 bytes, Stack size 48 bytes, delay.o(i.Delay_ms))
+<BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = Delay_ms &rArr; RCC_GetClocksFreq
+</UL>
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
+</UL>
+<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[6f]"></a>GPIO_Init</STRONG> (Thumb, 144 bytes, Stack size 20 bytes, stm32f4xx_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioC()
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioC()
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioA()
 </UL>
 
-<P><STRONG><a name="[6d]"></a>GPIO_PinAFConfig</STRONG> (Thumb, 70 bytes, Stack size 20 bytes, stm32f4xx_gpio.o(i.GPIO_PinAFConfig))
+<P><STRONG><a name="[73]"></a>GPIO_PinAFConfig</STRONG> (Thumb, 70 bytes, Stack size 20 bytes, stm32f4xx_gpio.o(i.GPIO_PinAFConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_PinAFConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
 </UL>
 
-<P><STRONG><a name="[6a]"></a>RCC_AHB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioC()
+<P><STRONG><a name="[71]"></a>RCC_AHB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioC()
 </UL>
 
-<P><STRONG><a name="[6e]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+<P><STRONG><a name="[6c]"></a>RCC_APB1PeriphResetCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
+</UL>
+
+<P><STRONG><a name="[74]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+</UL>
+
+<P><STRONG><a name="[6b]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphResetCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
+</UL>
+
+<P><STRONG><a name="[69]"></a>RCC_GetClocksFreq</STRONG> (Thumb, 214 bytes, Stack size 20 bytes, stm32f4xx_rcc.o(i.RCC_GetClocksFreq))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = RCC_GetClocksFreq
+</UL>
+<BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
+</UL>
+
+<P><STRONG><a name="[7e]"></a>SPI_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f4xx_spi.o(i.SPI_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
+</UL>
+
+<P><STRONG><a name="[6a]"></a>SPI_I2S_DeInit</STRONG> (Thumb, 152 bytes, Stack size 8 bytes, stm32f4xx_spi.o(i.SPI_I2S_DeInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SPI_I2S_DeInit
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphResetCmd
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
+</UL>
+
+<P><STRONG><a name="[7d]"></a>SPI_Init</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, stm32f4xx_spi.o(i.SPI_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SPI_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
 </UL>
 
 <P><STRONG><a name="[62]"></a>SystemInit</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, system_stm32f4xx.o(i.SystemInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = SystemInit &rArr; [local to system_stm32f4xx_c]::SetSysClock()
 </UL>
-<BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;[local to system_stm32f4xx_c]::SetSysClock()
+<BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;[local to system_stm32f4xx_c]::SetSysClock()
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
-<P><STRONG><a name="[70]"></a>TIM_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+<P><STRONG><a name="[76]"></a>TIM_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
 </UL>
 
-<P><STRONG><a name="[73]"></a>TIM_OC1Init</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, stm32f4xx_tim.o(i.TIM_OC1Init))
+<P><STRONG><a name="[79]"></a>TIM_OC1Init</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, stm32f4xx_tim.o(i.TIM_OC1Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIM_OC1Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
+<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
 </UL>
 
-<P><STRONG><a name="[74]"></a>TIM_OC1PreloadConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC1PreloadConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
+<P><STRONG><a name="[7a]"></a>TIM_OC1PreloadConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC1PreloadConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
 </UL>
 
-<P><STRONG><a name="[6f]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_TimeBaseInit))
-<BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+<P><STRONG><a name="[75]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_TimeBaseInit))
+<BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
 </UL>
 
-<P><STRONG><a name="[69]"></a>initGpioC()</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, main.o(i._Z9initGpioCv))
+<P><STRONG><a name="[6e]"></a>initGpioA()</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, main.o(i._Z9initGpioAv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = initGpioA() &rArr; GPIO_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[70]"></a>initGpioC()</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, main.o(i._Z9initGpioCv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = initGpioC() &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[77]"></a>Pwm::getPeriodeTim10()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pwm.o(i._ZN3Pwm15getPeriodeTim10Ev))
-<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setDutyCycleTim10(signed char)
-<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[81]"></a>Pwm::getPeriodeTim10()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pwm.o(i._ZN3Pwm15getPeriodeTim10Ev))
+<BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[79]"></a>Pwm::getPeriodeTim11()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pwm.o(i._ZN3Pwm15getPeriodeTim11Ev))
-<BR><BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setDutyCycleTim11(signed char)
-<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[83]"></a>Pwm::getPeriodeTim11()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, pwm.o(i._ZN3Pwm15getPeriodeTim11Ev))
+<BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[6c]"></a>Pwm::pwmInitPinTim10(unsigned)</STRONG> (Thumb, 110 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm15pwmInitPinTim10Ej))
+<P><STRONG><a name="[72]"></a>Pwm::pwmInitPinTim10(unsigned)</STRONG> (Thumb, 110 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm15pwmInitPinTim10Ej))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = Pwm::pwmInitPinTim10(unsigned) &rArr; GPIO_PinAFConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
-<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[71]"></a>Pwm::pwmInitPinTim11(unsigned)</STRONG> (Thumb, 110 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm15pwmInitPinTim11Ej))
+<P><STRONG><a name="[77]"></a>Pwm::pwmInitPinTim11(unsigned)</STRONG> (Thumb, 110 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm15pwmInitPinTim11Ej))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = Pwm::pwmInitPinTim11(unsigned) &rArr; GPIO_PinAFConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
-<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -574,98 +626,79 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[81]"></a>Pwm::setPeriodeTim11(unsigned)</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, pwm.o(i._ZN3Pwm15setPeriodeTim11Ej))
+<P><STRONG><a name="[82]"></a>Pwm::setPeriodeTim11(unsigned)</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, pwm.o(i._ZN3Pwm15setPeriodeTim11Ej))
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[72]"></a>Pwm::pwmModeInitTim10()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm16pwmModeInitTim10Ev))
+<P><STRONG><a name="[78]"></a>Pwm::pwmModeInitTim10()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm16pwmModeInitTim10Ev))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Pwm::pwmModeInitTim10() &rArr; TIM_OC1Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
-<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
+<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[75]"></a>Pwm::pwmModeInitTim11()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm16pwmModeInitTim11Ev))
+<P><STRONG><a name="[7b]"></a>Pwm::pwmModeInitTim11()</STRONG> (Thumb, 48 bytes, Stack size 32 bytes, pwm.o(i._ZN3Pwm16pwmModeInitTim11Ev))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Pwm::pwmModeInitTim11() &rArr; TIM_OC1Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
-<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
+<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[76]"></a>Pwm::setDutyCycleTim10(signed char)</STRONG> (Thumb, 40 bytes, Stack size 4 bytes, pwm.o(i._ZN3Pwm17setDutyCycleTim10Ea))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Pwm::setDutyCycleTim10(signed char)
-</UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim10()
-</UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
+<P><STRONG><a name="[85]"></a>SPI::SPISendWrite(unsigned short)</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, spi.o(i._ZN3SPI12SPISendWriteEt))
+<BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[78]"></a>Pwm::setDutyCycleTim11(signed char)</STRONG> (Thumb, 40 bytes, Stack size 4 bytes, pwm.o(i._ZN3Pwm17setDutyCycleTim11Ea))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Pwm::setDutyCycleTim11(signed char)
+<P><STRONG><a name="[7c]"></a>SPI::initGpioASpi1()</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, spi.o(i._ZN3SPI13initGpioASpi1Ev))
+<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = SPI::initGpioASpi1() &rArr; GPIO_PinAFConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim11()
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Init
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Cmd
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
-</UL>
-
-<P><STRONG><a name="[7e]"></a>Motor::dirMotorRBLF()</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, motor.o(i._ZN5Motor12dirMotorRBLFEv))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
-</UL>
-
-<P><STRONG><a name="[7d]"></a>Motor::dirMotorRFLB()</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, motor.o(i._ZN5Motor12dirMotorRFLBEv))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
+<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7b]"></a>Motor::dirMotorForward()</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, motor.o(i._ZN5Motor15dirMotorForwardEv))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
-</UL>
-
-<P><STRONG><a name="[7c]"></a>Motor::dirMotorBackward()</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, motor.o(i._ZN5Motor16dirMotorBackwardEv))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
+<P><STRONG><a name="[84]"></a>SPI::SPISendReadAdd(unsigned short)</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, spi.o(i._ZN3SPI14SPISendReadAddEt))
+<BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[7f]"></a>Motor::initPwm(Pwm*)</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, motor.o(i._ZN5Motor7initPwmEP3Pwm))
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7a]"></a>Motor::motorMove(signed char, signed char)</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, motor.o(i._ZN5Motor9motorMoveEaa))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = Motor::motorMove(signed char, signed char) &rArr; Pwm::setDutyCycleTim11(signed char)
-</UL>
-<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setDutyCycleTim11(signed char)
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setDutyCycleTim10(signed char)
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::dirMotorBackward()
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::dirMotorForward()
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::dirMotorRFLB()
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::dirMotorRBLF()
-</UL>
-<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
+<P><STRONG><a name="[8d]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
 
-<P><STRONG><a name="[89]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+<P><STRONG><a name="[8e]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
 
-<P><STRONG><a name="[8a]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+<P><STRONG><a name="[8f]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[8b]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
-
-<P><STRONG><a name="[61]"></a>main</STRONG> (Thumb, 112 bytes, Stack size 40 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = main &rArr; Pwm::pwmInitPinTim11(unsigned) &rArr; GPIO_PinAFConfig
+<P><STRONG><a name="[61]"></a>main</STRONG> (Thumb, 476 bytes, Stack size 56 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = main &rArr; Delay_ms &rArr; RCC_GetClocksFreq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::motorMove(signed char, signed char)
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::initPwm(Pwm*)
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setPeriodeTim11(unsigned)
+<BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor::initPwm(Pwm*)
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::SPISendReadAdd(unsigned short)
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::initGpioASpi1()
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI::SPISendWrite(unsigned short)
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim11()
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmModeInitTim10()
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setPeriodeTim11(unsigned)
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::setPeriodeTim10(unsigned)
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim11()
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim10()
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim11(unsigned)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::pwmInitPinTim10(unsigned)
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim11()
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm::getPeriodeTim10()
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioC()
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioC()
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initGpioA()
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL><P>
@@ -678,7 +711,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Default_Handler
 </UL>
 
-<P><STRONG><a name="[68]"></a>[local to system_stm32f4xx_c]::SetSysClock()</STRONG> (Thumb, 220 bytes, Stack size 12 bytes, system_stm32f4xx.o(i._ZN40_INTERNAL_18_system_stm32f4xx_c_5d646a6711SetSysClockEv))
+<P><STRONG><a name="[6d]"></a>[local to system_stm32f4xx_c]::SetSysClock()</STRONG> (Thumb, 220 bytes, Stack size 12 bytes, system_stm32f4xx.o(i._ZN40_INTERNAL_18_system_stm32f4xx_c_5d646a6711SetSysClockEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = [local to system_stm32f4xx_c]::SetSysClock()
 </UL>
 <BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit

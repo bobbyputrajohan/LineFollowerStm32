@@ -25,3 +25,6 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: User\Motor.h
 .\objects\main.o: User\Pwm.h
+.\objects\main.o: User\SPI.h
+.\objects\main.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
+.\objects\main.o: User\Delay.h

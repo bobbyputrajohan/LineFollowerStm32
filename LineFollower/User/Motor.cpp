@@ -166,9 +166,9 @@ void Motor::dirMotorRFLB()
 
 void Motor::motorMove(int8_t motorRight, int8_t motorLeft)
 {
-   if(motorRight && motorLeft > -1)
+  /* if(motorRight && motorLeft > -1)
     {
-        dirMotorForward();
+       dirMotorForward();
     }
     
     else if(motorRight && motorLeft < 0)
@@ -186,6 +186,7 @@ void Motor::motorMove(int8_t motorRight, int8_t motorLeft)
         dirMotorRBLF();
     }
     
+*/
     p_pwm->setDutyCycleTim10(abs(motorRight));
     p_pwm->setDutyCycleTim11(abs(motorLeft));
 }
