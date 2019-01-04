@@ -3,6 +3,7 @@
 #include "Motor.h"
 #include "stm32f4xx_gpio.h" 
 
+
 static Pwm *p_pwm = NULL;
 void Motor::initPwm(Pwm *p_pwmMotor)
 {

@@ -1,5 +1,5 @@
-#include <stdint.h>
-class Pwm
+#include "InterfacePwm.h"
+class Pwm : public InterfacePwm
 {
     public:
         Pwm(){}

@@ -20,3 +20,4 @@
 .\objects\pwm.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\objects\pwm.o: .\Lib\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\pwm.o: User\Pwm.h
+.\objects\pwm.o: User\InterfacePwm.h

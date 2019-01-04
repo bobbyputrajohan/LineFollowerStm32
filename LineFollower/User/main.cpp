@@ -2,11 +2,45 @@
 #include "stm32f4xx_conf.h"
 #include "main.h"
 #include "Motor.h"
-#include "SPI.h"
 #include "stm32f4xx_adc.h"
 #include "Delay.h"
+#include "Gyro.h" 
+using namespace STM32F407;
 
-
+void initGpioASpi1()
+{
+    GPIO_InitTypeDef  GPIO_InitStructure;
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+    GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);   
+    
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_SPI1);
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource6, GPIO_AF_SPI1);
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_SPI1);
+    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+    
+    SPI_I2S_DeInit(SPI1);
+    SPI_InitTypeDef spi;
+    spi.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    spi.SPI_DataSize = SPI_DataSize_8b;
+    spi.SPI_FirstBit = SPI_FirstBit_MSB;
+	spi.SPI_Mode = SPI_Mode_Master;
+	spi.SPI_NSS = SPI_NSS_Soft|SPI_NSSInternalSoft_Set;
+    spi.SPI_CPOL = SPI_CPOL_High;
+    spi.SPI_CPHA =  SPI_CPHA_2Edge;
+    spi.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_16;
+    //SPI1->CR1 &= ~SPI_CR1_SPE;
+	/* Init SPI */
+	SPI_Init(SPI1, &spi);
+	/* Enable SPI */
+	//SPI1->CR1 |= SPI_CR1_SPE;
+    SPI_Cmd(SPI1, ENABLE);
+}
 
 void initGpioC()
 {
@@ -23,12 +57,23 @@ void initGpioC()
 void initGpioA()
 {
     GPIO_InitTypeDef  GPIO_InitStructure;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(GPIOA, &GPIO_InitStructure);   
+}
+
+void initGpioB()
+{
+    GPIO_InitTypeDef  GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);       
 }
 
 void initAdcPin()
@@ -45,9 +90,18 @@ int main()
     Pwm *p_pwm = &Pwm1;
     Motor *p_motor = &motor;
     p_motor->initPwm(&Pwm1);
-    SPI SPII;
-    SPII.initGpioASpi1();
+    
+    initGpioASpi1();
     initGpioA();
+    initGpioB();
+    //SPICom SPII;
+    //SPII.initialize(SPI1,GPIOA,GPIO_Pin_4);
+    //ISpi *farisjelek = new SPICom();
+    //SPII.initGpioASpi1();
+   // SPII.initGpioASpi2();
+   
+    InterfacePwm *test = new Pwm();
+    test -> setPeriodeTim10(10000);
     p_pwm -> setPeriodeTim10(10000);
     p_pwm -> pwmInitPinTim10 (Pwm1.getPeriodeTim10());
     p_pwm -> pwmModeInitTim10(); 
@@ -55,71 +109,87 @@ int main()
     p_pwm -> pwmInitPinTim11(Pwm1.getPeriodeTim11());
     p_pwm -> pwmModeInitTim11();     
     
-    //SPISend(0x80);
+    //Gyro gyro;
+    //Gyro *pGyro = &gyro;
+    //pGyro->initSPIGyro(&SPII,CLOCK100HZ,SCALE500DPS);
+    SPI coba1;
+    SPI coba2;
+    coba1.initialize(SPI1,GPIOA,4);
+    coba2.initialize(SPI1,GPIOA,4);
+    ISpi *coba = new SPI();
+    GyroL3Gxxxx coba4;
+    GyroL3Gxxxx coba3;
     
-    GPIOA->BSRRH = GPIO_Pin_3; // mati
-    Delay_ms(1);
-    volatile uint16_t result;
-    volatile uint16_t read1;
-    volatile uint16_t read2;
-    
-    GPIOA->BSRRH = GPIO_Pin_3; // mati
-    Delay_ms(1);
-    read1 = SPII.SPISendReadAdd(0x0f00); //ctrl 1
-    GPIOA->BSRRL = GPIO_Pin_3; // hidup
-    Delay_ms(1);    
-        
-    GPIOA->BSRRH = GPIO_Pin_3; // mati
-    Delay_ms(1);
-    SPII.SPISendWrite(0x200f); //ctrl 1
-    GPIOA->BSRRL = GPIO_Pin_3; // hidup
-    Delay_ms(1);
-    GPIOA->BSRRH = GPIO_Pin_3; // mati
-    Delay_ms(1);
-    SPII.SPISendWrite(0x2100); //ctrl 2
-    GPIOA->BSRRL = GPIO_Pin_3; // hidup
-    Delay_ms(1);
-    GPIOA->BSRRH = GPIO_Pin_3; // mati
-    Delay_ms(1);
-    SPII.SPISendWrite(0x2200);//ctrl 3
-    GPIOA->BSRRL = GPIO_Pin_3; // hidup
-    Delay_ms(1);
-    GPIOA->BSRRH = GPIO_Pin_3; // mati
-    Delay_ms(1);
-    SPII.SPISendWrite(0x2330);//ctrl 4
-    GPIOA->BSRRL = GPIO_Pin_3; // hidup
-    Delay_ms(1);
-    
-    GPIOA->BSRRH = GPIO_Pin_3; // mati
-    Delay_ms(1);
-    SPII.SPISendWrite(0x2400);//ctrl 5
-    GPIOA->BSRRL = GPIO_Pin_3; // hidup
-    Delay_ms(1);
-    
+    coba4.initSPIGyro(&coba1,VAL_C1_CLOCK_100_HZ,VAL_C4_SCALE500DPS);
+    coba3.initSPIGyro(&coba2,VAL_C1_CLOCK_100_HZ,VAL_C4_SCALE500DPS);
+    float readGyro,readGyro1,result;
+    volatile float data;
+    volatile float readGyroX,readGyroY,readGyroZ;
+    volatile uint8_t dataread,dataread1,dataread2,dataread3,dataread4,dataread5;
+    float reada,readb,readc;
+    uint8_t rx[2],tx[10];
+    tx[0]=0x80|0x21;
+    tx[1]=0x00;
+    rx[0]=0x00;
+    rx[1]=0x00;
+    int test1;
+    //GPIOA -> BSRRL = GPIO_Pin_6; // hidup
+    //GPIOA -> BSRRH = GPIO_Pin_6; // mati
     while(1)
     {
-        GPIOA->BSRRH = GPIO_Pin_3; // mati
-        Delay_ms(1);
-        read1=SPII.SPISendReadAdd(0x2800);
-         //= SPISendReadAdd(0x00);
+     readGyroX = coba4.getDataVelGyroXRad();
+     readGyroY = coba3.getDataVelGyroXRad();
+     //   readGyroX = coba4.getSensitivityGyroDPS(); uint8_t tx[3],rx[3];
+    //coba1.acquire();
+    //coba1.transceive(tx,2,rx);
+    //coba1.acquire();
+    //coba2.acquire();
+    //coba1.release();
+    //coba1.release();
+        //bool result = GPIOA -> IDR & GPIO_Pin_4;
+        //volatile uint16_t GPIOA1 = GPIOA -> ODR; //0000 0000 0000 0000 
+                                               //0000 0000 0011 0000      7654 3210
+     
+        /*if(GPIOA -> BSSRL )
+        {
+            test1=1;
+        }
+        else 
+        {
+            test1=0;
+        }*/
+   
+        //data = SPII.SPISendReadAdd(0x0f00);
         
-        GPIOA->BSRRL = GPIO_Pin_3; // hidup
-        Delay_ms(1);
+        //readGyroX = pGyro->receiveDataGyroX();
+        //readGyroY = pGyro->receiveDataGyroY();
+        //readGyroZ = pGyro->receiveDataGyroZ();
+        //pGyro->getAlldataGyro(&reada,&readb,&readc);
+        //coba1 = reada;
+        //coba2 = readb;
+        //coba3 = readc;
         
-        GPIOA->BSRRH = GPIO_Pin_3; // mati
-        Delay_ms(1);
+        //data1 = result * pGyro->getSensitivity();
+        //data = pGyro->getSensitivity();
+        //Delay_ms(1000);
+        //coba1 = SPII.SPI2SendReadData(SPI1,0x2000);
+        //readGyro = pGyro->receiveDataGyroY();
+        //GPIOA->BSRRH = GPIO_Pin_4; // mati
+        //SPII.acquire();
+        //SPII.transceive(tx,2,rx,2);
+        //SPII.release();
+        //readGyroX = pGyro->receiveDataGyroX();
+        //readGyroY = pGyro->receiveDataGyroY();
+        //readGyroZ = pGyro->receiveDataGyroZ();
+       
+        //dataread = pGyro->readRegister(CTRL1);
+        //pGyro->writeRegister(CTRL1,CLOCK200HZ);
+        //dataread1 = pGyro->readRegister(CTRL2);
+        //dataread2 = pGyro->readRegister(CTRL3);
+        //dataread3 = pGyro->readRegister(CTRL4);
+        //dataread4 = pGyro->readRegister(CTRL5);
+        //pGyro->getDataGyroXYZ(&readGyro,&readGyro1,&result);
         
-        read2=SPII.SPISendReadAdd(0x2900);
-        //SPISendReadAdd(0x00);
-        GPIOA->BSRRL = GPIO_Pin_3; // hidup
-        Delay_ms(1);
-        GPIOA->BSRRH = GPIO_Pin_3; // mati
-        Delay_ms(1);
-        result = SPII.SPISendReadAdd(0x0f00);
-        // = SPISendReadAdd(0x00);
-        Delay_ms(1);
-        GPIOA->BSRRL = GPIO_Pin_3; // hidup
-        
-        
+        //GPIOA->BSRRL = GPIO_Pin_4; // hidup
     }
 }
