@@ -30,7 +30,7 @@ void initGpioASpi1()
     spi.SPI_DataSize = SPI_DataSize_8b;
     spi.SPI_FirstBit = SPI_FirstBit_MSB;
 	spi.SPI_Mode = SPI_Mode_Master;
-	spi.SPI_NSS = SPI_NSS_Soft|SPI_NSSInternalSoft_Set;
+	spi.SPI_NSS = SPI_NSS_Soft | SPI_NSSInternalSoft_Set;
     spi.SPI_CPOL = SPI_CPOL_High;
     spi.SPI_CPHA =  SPI_CPHA_2Edge;
     spi.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_16;
@@ -120,76 +120,15 @@ int main()
     GyroL3Gxxxx coba4;
     GyroL3Gxxxx coba3;
     
-    coba4.initSPIGyro(&coba1,VAL_C1_CLOCK_100_HZ,VAL_C4_SCALE500DPS);
-    coba3.initSPIGyro(&coba2,VAL_C1_CLOCK_100_HZ,VAL_C4_SCALE500DPS);
+    coba4.initSPIGyro(&coba1,GyroL3Gxxxx::VAL_C1_CLOCK_100_HZ,GyroL3Gxxxx::VAL_C4_SCALE500DPS);
+    coba3.initSPIGyro(&coba2,GyroL3Gxxxx::VAL_C1_CLOCK_100_HZ,GyroL3Gxxxx::VAL_C4_SCALE500DPS);
     float readGyro,readGyro1,result;
     volatile float data;
     volatile float readGyroX,readGyroY,readGyroZ;
-    volatile uint8_t dataread,dataread1,dataread2,dataread3,dataread4,dataread5;
-    float reada,readb,readc;
-    uint8_t rx[2],tx[10];
-    tx[0]=0x80|0x21;
-    tx[1]=0x00;
-    rx[0]=0x00;
-    rx[1]=0x00;
-    int test1;
-    //GPIOA -> BSRRL = GPIO_Pin_6; // hidup
-    //GPIOA -> BSRRH = GPIO_Pin_6; // mati
+ 
     while(1)
     {
-     readGyroX = coba4.getDataVelGyroXRad();
-     readGyroY = coba3.getDataVelGyroXRad();
-     //   readGyroX = coba4.getSensitivityGyroDPS(); uint8_t tx[3],rx[3];
-    //coba1.acquire();
-    //coba1.transceive(tx,2,rx);
-    //coba1.acquire();
-    //coba2.acquire();
-    //coba1.release();
-    //coba1.release();
-        //bool result = GPIOA -> IDR & GPIO_Pin_4;
-        //volatile uint16_t GPIOA1 = GPIOA -> ODR; //0000 0000 0000 0000 
-                                               //0000 0000 0011 0000      7654 3210
-     
-        /*if(GPIOA -> BSSRL )
-        {
-            test1=1;
-        }
-        else 
-        {
-            test1=0;
-        }*/
-   
-        //data = SPII.SPISendReadAdd(0x0f00);
-        
-        //readGyroX = pGyro->receiveDataGyroX();
-        //readGyroY = pGyro->receiveDataGyroY();
-        //readGyroZ = pGyro->receiveDataGyroZ();
-        //pGyro->getAlldataGyro(&reada,&readb,&readc);
-        //coba1 = reada;
-        //coba2 = readb;
-        //coba3 = readc;
-        
-        //data1 = result * pGyro->getSensitivity();
-        //data = pGyro->getSensitivity();
-        //Delay_ms(1000);
-        //coba1 = SPII.SPI2SendReadData(SPI1,0x2000);
-        //readGyro = pGyro->receiveDataGyroY();
-        //GPIOA->BSRRH = GPIO_Pin_4; // mati
-        //SPII.acquire();
-        //SPII.transceive(tx,2,rx,2);
-        //SPII.release();
-        //readGyroX = pGyro->receiveDataGyroX();
-        //readGyroY = pGyro->receiveDataGyroY();
-        //readGyroZ = pGyro->receiveDataGyroZ();
-       
-        //dataread = pGyro->readRegister(CTRL1);
-        //pGyro->writeRegister(CTRL1,CLOCK200HZ);
-        //dataread1 = pGyro->readRegister(CTRL2);
-        //dataread2 = pGyro->readRegister(CTRL3);
-        //dataread3 = pGyro->readRegister(CTRL4);
-        //dataread4 = pGyro->readRegister(CTRL5);
-        //pGyro->getDataGyroXYZ(&readGyro,&readGyro1,&result);
-        
-        //GPIOA->BSRRL = GPIO_Pin_4; // hidup
+     readGyro = coba4.getDataVelGyroXRad();
+     readGyro1 = coba3.getDataVelGyroXRad();
     }
 }

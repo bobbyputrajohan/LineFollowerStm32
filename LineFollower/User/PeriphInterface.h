@@ -123,13 +123,20 @@ public:
 class ISpi
 {
 public:
+    
+    enum CmdStatus
+    {
+        CMD_SUCCESS = 0,
+        CMD_SPI_BUSY = 1,
+        CMD_SPI_ERROR = 2
+    };
    
-    virtual bool transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBuffer) = 0;
-    virtual bool acquire() = 0;
+    virtual CmdStatus transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBuffer) = 0;
+    virtual CmdStatus acquire() = 0;
     virtual void release() = 0;
 
     // in consideration, in transmit receive or not
-    virtual uint8_t isError() = 0;
+    virtual uint8_t getErrorCode() = 0;
 };
 
 class II2c

@@ -2,9 +2,6 @@
 #include "SPI.h"
 using namespace STM32F407;
 
-uint8_t m_flagPort = 0;
-
-const uint8_t PORT_COUNT = 6;
 volatile bool SPI::m_portLock[PORT_COUNT] = {0};
 
 SPI::SPI()
@@ -12,10 +9,12 @@ SPI::SPI()
     m_SPIx = NULL;            
     m_gpioPort = NULL;
     m_pin = NULL;
+    m_errorCode = 0;
+    m_flagPort = 0;
 }
 
-bool SPI::transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBuffer)
-{ 
+SPI::CmdStatus SPI::transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBuffer)
+{  
     for(int i=0; i<txDataLen; i++)
     {
         while(!((m_SPIx)->SR & SPI_SR_TXE));
@@ -23,8 +22,23 @@ bool SPI::transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBuffer)
         while(!((m_SPIx)->SR & SPI_SR_RXNE));
         rxBuffer[i] = m_SPIx->DR;
     } 
+    if(!((m_SPIx)->SR & SPI_SR_MODF))
+    {
+        m_errorCode |= ERR_MODE_FAULT;
+        return CMD_SPI_ERROR;
+    }
+    if(!((m_SPIx)->SR & SPI_SR_OVR))
+    {
+        m_errorCode |= ERR_MODE_OVERRUN;
+        return CMD_SPI_ERROR;
+    }
     while (m_SPIx->SR & SPI_SR_BSY);
-    return true; //harusnya ada return false-nya, cek kalau error
+    if(!((m_SPIx)->SR & SPI_SR_CRCERR))
+    {
+        m_errorCode |= ERR_MODE_CRC;
+        return CMD_SPI_ERROR;
+    }
+    return CMD_SUCCESS; //harusnya ada return false-nya, cek kalau error
 }
 void SPI::initialize(SPI_TypeDef* SPIx,GPIO_TypeDef* GpioPort,uint16_t Pin)
 {
@@ -58,15 +72,15 @@ void SPI::initialize(SPI_TypeDef* SPIx,GPIO_TypeDef* GpioPort,uint16_t Pin)
     }
 }
 
-bool SPI::acquire()
+SPI::CmdStatus SPI::acquire()
 {
     if(m_portLock[m_flagPort])
     {
-        return false;
+        return CMD_SPI_BUSY;
     }
     m_portLock[m_flagPort] = true;
     m_gpioPort -> BSRRH = 0x01 << m_pin;
-    return true;
+    return CMD_SUCCESS;
 }
 void SPI::release()
 {
@@ -74,5 +88,13 @@ void SPI::release()
     m_gpioPort -> BSRRL = 0x01 << m_pin;
 }
 
-uint8_t SPI::isError()
-{}
+uint8_t SPI::getErrorCode()
+{
+    uint8_t tempErrorCode = m_errorCode;
+    m_errorCode = 0;
+    if(!(tempErrorCode))
+    {
+        m_SPIx->DR;
+    }
+    return tempErrorCode;
+}

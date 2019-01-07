@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LineFollower.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LineFollower.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jan 04 20:24:11 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jan 07 14:07:41 2019
 <BR><P>
 <H3>Maximum Stack Usage =        768 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1228,7 +1228,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7d]"></a>STM32F407::SPI::transceive(unsigned char*, unsigned, unsigned char*)</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, spi.o(i._ZN9STM32F4073SPI10transceiveEPhjS1_))
+<P><STRONG><a name="[7d]"></a>STM32F407::SPI::transceive(unsigned char*, unsigned, unsigned char*)</STRONG> (Thumb, 138 bytes, Stack size 16 bytes, spi.o(i._ZN9STM32F4073SPI10transceiveEPhjS1_))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = STM32F407::SPI::transceive(unsigned char*, unsigned, unsigned char*)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> spi.o(.constdata__ZTVN9STM32F4073SPIE)
@@ -1239,7 +1239,7 @@ Global Symbols
 <P><STRONG><a name="[7f]"></a>STM32F407::SPI::release()</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, spi.o(i._ZN9STM32F4073SPI7releaseEv))
 <BR>[Address Reference Count : 1]<UL><LI> spi.o(.constdata__ZTVN9STM32F4073SPIE)
 </UL>
-<P><STRONG><a name="[e1]"></a>STM32F407::SPI::SPI()</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, spi.o(i._ZN9STM32F4073SPIC1Ev))
+<P><STRONG><a name="[e1]"></a>STM32F407::SPI::SPI()</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, spi.o(i._ZN9STM32F4073SPIC1Ev))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = STM32F407::SPI::SPI()
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ISpi::ISpi__sub_object()
@@ -1476,8 +1476,8 @@ Global Symbols
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete (void*)
 </UL>
 
-<P><STRONG><a name="[66]"></a>main</STRONG> (Thumb, 292 bytes, Stack size 144 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = main &rArr; GyroL3Gxxxx::initSPIGyro(STM32F407::SPI*, unsigned char, unsigned char) &rArr; GyroL3Gxxxx::writeRegister(unsigned char, unsigned char)
+<P><STRONG><a name="[66]"></a>main</STRONG> (Thumb, 264 bytes, Stack size 120 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = main &rArr; GyroL3Gxxxx::initSPIGyro(STM32F407::SPI*, unsigned char, unsigned char) &rArr; GyroL3Gxxxx::writeRegister(unsigned char, unsigned char)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STM32F407::SPI::SPI()
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STM32F407::SPI::initialize(SPI_TypeDef*, GPIO_TypeDef*, unsigned short)
