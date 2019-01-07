@@ -13,7 +13,7 @@ SPI::SPI()
     m_flagPort = 0;
 }
 
-SPI::CmdStatus SPI::transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBuffer)
+bool SPI::transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBuffer)
 {  
     for(int i=0; i<txDataLen; i++)
     {
@@ -25,20 +25,20 @@ SPI::CmdStatus SPI::transceive(uint8_t* txData,uint32_t txDataLen, uint8_t* rxBu
     if(!((m_SPIx)->SR & SPI_SR_MODF))
     {
         m_errorCode |= ERR_MODE_FAULT;
-        return CMD_SPI_ERROR;
+        return false;
     }
     if(!((m_SPIx)->SR & SPI_SR_OVR))
     {
         m_errorCode |= ERR_MODE_OVERRUN;
-        return CMD_SPI_ERROR;
+        return false;
     }
     while (m_SPIx->SR & SPI_SR_BSY);
     if(!((m_SPIx)->SR & SPI_SR_CRCERR))
     {
         m_errorCode |= ERR_MODE_CRC;
-        return CMD_SPI_ERROR;
+        return false;
     }
-    return CMD_SUCCESS; //harusnya ada return false-nya, cek kalau error
+    return true; //harusnya ada return false-nya, cek kalau error
 }
 void SPI::initialize(SPI_TypeDef* SPIx,GPIO_TypeDef* GpioPort,uint16_t Pin)
 {
@@ -72,16 +72,17 @@ void SPI::initialize(SPI_TypeDef* SPIx,GPIO_TypeDef* GpioPort,uint16_t Pin)
     }
 }
 
-SPI::CmdStatus SPI::acquire()
+bool SPI::acquire()
 {
     if(m_portLock[m_flagPort])
     {
-        return CMD_SPI_BUSY;
+        return false;
     }
     m_portLock[m_flagPort] = true;
     m_gpioPort -> BSRRH = 0x01 << m_pin;
-    return CMD_SUCCESS;
+    return true;
 }
+
 void SPI::release()
 {
     m_portLock[m_flagPort] = false;

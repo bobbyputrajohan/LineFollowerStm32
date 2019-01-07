@@ -16,8 +16,8 @@ public:
     SPI(); 
     ~SPI(){}
     void initialize(SPI_TypeDef* SPIx, GPIO_TypeDef* GpioPortCs, uint16_t PinCs);
-    virtual CmdStatus transceive(uint8_t* txData, uint32_t txDataLen, uint8_t* rxBuffer); 
-    virtual CmdStatus acquire();
+    virtual bool transceive(uint8_t* txData, uint32_t txDataLen, uint8_t* rxBuffer); 
+    virtual bool acquire();
     virtual void release();
     virtual uint8_t getErrorCode();
             
